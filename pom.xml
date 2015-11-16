@@ -1,0 +1,416 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+	Copyright 2015 Vitaliy Berdinskikh
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+		http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+
+-->
+<project xmlns='http://maven.apache.org/POM/4.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd'>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>ua.co.ur6lad</groupId>
+	<artifactId>stroke-taglib</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>Stroke Taglib</name>
+	<description>The stroke-taglib is a JSP tag library. It makes tracking with SiteCatalyst easier.</description>
+	<inceptionYear>2015</inceptionYear>
+	<url>http://ur6lad.co.ua/stroke-taglib</url>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>See LICENSE</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>ur6lad</id>
+			<name>Vitaliy Berdinskikh</name>
+			<email>ur6lad@gmail.com</email>
+			<url>http://ur6lad.co.ua/</url>
+			<timezone>Europe/Kyiv</timezone>
+		</developer>
+	</developers>
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<scm>
+		<connection>scm:hg:http://bitbucket.org/ur6lad/stroke-taglib</connection>
+		<developerConnection>scm:hg:https://ur6lad@bitbucket.org/ur6lad/stroke-taglib</developerConnection>
+		<url>http://bitbucket.org/ur6lad/stroke-taglib</url>
+	</scm>
+	<issueManagement>
+		<system>Bitbucket</system>
+		<url>https://bitbucket.org/ur6lad/stroke-taglib/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>drone.io</system>
+		<url>http://drone.io/bitbucket.org/ur6lad/stroke-taglib</url>
+		<notifiers>
+			<notifier>
+				<type>mail</type>
+				<sendOnFailure>true</sendOnFailure>
+				<sendOnSuccess>false</sendOnSuccess>
+				<configuration>
+					<address>ur6lad@gmail.com</address>
+				</configuration>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>oss-jfrog-artifactory</id>
+			<name>oss-jfrog-artifactory-releases</name>
+			<url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>oss-jfrog-artifactory</id>
+			<name>oss-jfrog-artifactory-snapshots</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<properties>
+		<!-- How many analytic variables does it use? -->
+		<conversionVariableCount>75</conversionVariableCount>
+		<eventCount>100</eventCount>
+		<nameEvents>prodView,purchase,scAdd,scCheckout,scOpen,scRemove,scView</nameEvents>
+		<hierarchyVariableCount>5</hierarchyVariableCount>
+		<listVariableCount>3</listVariableCount>
+		<standardVariables>campaign,channel,charSet,cookieDomainPeriods,cookieLifetime,currencyCode,dc,dynamicAccountList,dynamicAccountMatch,dynamicAccountSelection,dynamicVariablePrefix,fpCookieDomainPeriods,linkDownloadFileTypes,linkExternalFilters,linkInternalFilters,linkLeaveQueryString,linkName,linkType,maxDelay,mobile,pageName,pageType,pageURL,purchaseID,referrer,s_objectID,server,state,timestamp,trackDownLoadLinks,trackExternalLinks,trackingServer,trackingServerSecure,trackInlineStats,transactionID,visitorID,visitorNamespace,zip</standardVariables>
+		<trafficVariableCount>75</trafficVariableCount>
+		<!-- Build -->
+		<linkXRef>false</linkXRef>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<targetJdk>1.6</targetJdk>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>LICENSE</include>
+					<include>NOTICE</include>
+				</includes>
+				<targetPath>META-INF</targetPath>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>${targetJdk}</source>
+					<target>${targetJdk}</target>
+					<compilerArgs>
+						<arg>-Xlint</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<!--
+						 - Generate number tag files: eVarN, eventN, hierN, listN, propN 
+						 -->
+						<id>number-tags</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<commandlineArgs>-o:${project.build.outputDirectory}/META-INF/tags/number-tags.txt -s:${project.build.outputDirectory}/xml/tags/number-tags.xml -xsl:${project.build.outputDirectory}/xml/tags/number-tags.xsl</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<!--
+						 - Generate name event tag files: prodView, purchase, scAdd, scCheckout, scOpen, scRemove, scView 
+						 -->
+						<id>event-tags</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<commandlineArgs>-o:${project.build.outputDirectory}/META-INF/tags/event-tags.txt -s:${project.build.outputDirectory}/xml/tags/event-tags.xml -xsl:${project.build.outputDirectory}/xml/tags/event-tags.xsl</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<!--
+						 - Generate standard variables' tag files 
+						 -->
+						<id>standard-tags</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<commandlineArgs>-o:${project.build.outputDirectory}/META-INF/tags/standard-tags.txt -s:${project.build.outputDirectory}/xml/tags/standard-tags.xml -xsl:${project.build.outputDirectory}/xml/tags/standard-tags.xsl</commandlineArgs>
+						</configuration>
+					</execution>
+					<execution>
+						<!--
+						 - Generate number tag files: eVarN, eventN, hierN, listN, propN 
+						 -->
+						<id>taglib</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<commandlineArgs>-o:${project.build.outputDirectory}/META-INF/stroke.tld -s:${project.build.outputDirectory}/xml/taglib/stroke.xml -xsl:${project.build.outputDirectory}/xml/taglib/taglib.xsl</commandlineArgs>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<includePluginDependencies>true</includePluginDependencies>
+					<mainClass>net.sf.saxon.Transform</mainClass>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.saxon</groupId>
+						<artifactId>Saxon-HE</artifactId>
+						<version>9.6.0-7</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>xml-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+						<phase>prepare-package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<validationSets>
+						<validationSet>
+							<dir>${project.build.outputDirectory}/META-INF</dir>
+							<includes>
+								<include>stroke.tld</include>
+							</includes>
+						</validationSet>
+					</validationSets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By>${project.developers[0].id}</Built-By>
+						</manifestEntries>
+					</archive>
+					<excludes>
+						<exclude>META-INF/tags/*.txt</exclude>
+					</excludes>
+					<includes>
+						<include>META-INF/**</include>
+						<include>ua/**</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>gpg-signing</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>sources</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10.1</version>
+						<configuration>
+							<links>
+								<link>http://www.slf4j.org/apidocs/</link>
+								<link>http://docs.oracle.com/javaee/6/api/</link>
+							</links>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>javadoc</goal>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.4</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>3.5</version>
+						<executions>
+							<execution>
+								<id>check-code</id>
+								<goals>
+									<goal>check</goal>
+									<goal>cpd-check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<!--
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10.1</version>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</reporting>
+			-->
+		</profile>
+		<profile>
+			<id>coco</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.7.5.201505241946</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<exclude>ua/co/ur6lad/stroke/UnsupportedVariableException.class</exclude>
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

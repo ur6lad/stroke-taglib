@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+	Copyright 2010-2015 Vitaliy Berdinskikh
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+
+-->
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+
+	<description>This JSP tag library makes tracking with SiteCatalyst easier.</description>
+
+	<display-name>Stroke Taglib</display-name>
+	<tlib-version>${project.version}</tlib-version>
+	<short-name>s</short-name>
+	<uri>${project.url}</uri>
+
+	<tag>
+		<name>eVar</name>
+		<tag-class>ua.co.ur6lad.stroke.OmniVariableTag$Conversion</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>number</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>event</name>
+		<tag-class>ua.co.ur6lad.stroke.OmniVariableTag$Event</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>number</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>hier</name>
+		<tag-class>ua.co.ur6lad.stroke.OmniVariableTag$Hierarchy</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>number</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>list</name>
+		<tag-class>ua.co.ur6lad.stroke.OmniVariableTag$List</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>number</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>product</name>
+		<tag-class>ua.co.ur6lad.stroke.ProductTag</tag-class>
+		<body-content>scriptless</body-content>
+		<variable>
+			<name-given>product</name-given>
+			<variable-class>ua.co.ur6lad.stroke.OmniBean</variable-class>
+		</variable>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>category</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>product</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>quantity</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<!-- QUESTION: Should it be integer?
+			<type>int</type>
+			-->
+		</attribute>
+		<attribute>
+			<name>totalCost</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<!-- QUESTION: Should it be float or double or BigDecimal?
+			<type>int</type>
+			-->
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>prop</name>
+		<tag-class>ua.co.ur6lad.stroke.OmniVariableTag$Traffic</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>number</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>takeDown</name>
+		<tag-class>ua.co.ur6lad.stroke.TakeDownTag</tag-class>
+		<body-content>scriptless</body-content>
+		<variable>
+			<name-given>analyticVariable</name-given>
+			<scope>NESTED</scope>
+		</variable>
+		<variable>
+			<name-given>analyticValue</name-given>
+			<scope>NESTED</scope>
+		</variable>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>variable</name>
+		<tag-class>ua.co.ur6lad.stroke.OmniVariableTag$Standard</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>ua.co.ur6lad.stroke.OmniBean</type>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+</taglib>

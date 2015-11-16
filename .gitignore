@@ -1,0 +1,11 @@
+*~
+\#*\#
+*.log
+
+target
+.classpath
+.hg
+.hgignore
+.hgtags
+.project
+.settings
